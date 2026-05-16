@@ -1,0 +1,3 @@
+https://engrove.pages.dev/*        https://engrove-toolbox.pages.dev/:splat    301
+https://engrove-audio.pages.dev/*  https://engrove-toolbox.pages.dev/:splat    301
+/*                                 https://engrove-toolbox.pages.dev/:splat    301
