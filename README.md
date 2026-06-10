@@ -27,11 +27,11 @@ evaluates at the edge before any origin handling occurs.
                   │   _redirects evaluation (per-request, O(rules))│
                   │                                                │
                   │   301 Moved Permanently                        │
-                  │   Location: https://engrove-toolbox.pages.dev/<path>
+                  │   Location: http://engroveaudio.com/<path>
                   └────────────────────────────────────────────────┘
                                        │
                                        ▼
-                       https://engrove-toolbox.pages.dev/
+                       http://engroveaudio.com/
 ```
 
 The Cloudflare Pages project that this repository is connected to must have
@@ -43,7 +43,7 @@ hostnames is terminated by this project and the redirect rules apply.
 | Field                  | Value                                       |
 | ---------------------- | ------------------------------------------- |
 | Hosting provider       | Cloudflare Pages                            |
-| Canonical destination  | `https://engrove-toolbox.pages.dev/`        |
+| Canonical destination  | `http://engroveaudio.com/`        |
 | Redirect status code   | `301 Moved Permanently`                     |
 | Path preservation      | Yes, via `:splat` parameter                 |
 | Query string handling  | Forwarded unchanged by Cloudflare           |
@@ -54,8 +54,8 @@ hostnames is terminated by this project and the redirect rules apply.
 
 | Legacy hostname                  | Status     | Resulting target                            |
 | -------------------------------- | ---------- | ------------------------------------------- |
-| `engrove.pages.dev`              | Redirected | `https://engrove-toolbox.pages.dev/:splat`  |
-| `engrove-audio.pages.dev`        | Redirected | `https://engrove-toolbox.pages.dev/:splat` |
+| `engrove.pages.dev`              | Redirected | `http://engroveaudio.com/:splat`  |
+| `engrove-audio.pages.dev`        | Redirected | `http://engroveaudio.com/:splat` |
 
 A catch-all rule (`/*`) is also defined as a defensive fallback so that any
 additional hostname later attached to the project inherits the same redirect
@@ -91,19 +91,19 @@ top-to-bottom against the request URL.
 ### Rule set in this repository
 
 ```
-https://engrove.pages.dev/*        https://engrove-toolbox.pages.dev/:splat    301
-https://engrove-audio.pages.dev/*  https://engrove-toolbox.pages.dev/:splat    301
-/*                                 https://engrove-toolbox.pages.dev/:splat    301
+https://engrove.pages.dev/*        http://engroveaudio.com/:splat    301
+https://engrove-audio.pages.dev/*  http://engroveaudio.com/:splat    301
+/*                                 http://engroveaudio.com/:splat    301
 ```
 
 Examples of how Cloudflare resolves these rules at the edge:
 
 | Incoming request                                  | Response                                                            |
 | ------------------------------------------------- | ------------------------------------------------------------------- |
-| `GET https://engrove.pages.dev/`                  | `301 → https://engrove-toolbox.pages.dev/`                          |
-| `GET https://engrove.pages.dev/projects/tonearm`  | `301 → https://engrove-toolbox.pages.dev/projects/tonearm`          |
-| `GET https://engrove-audio.pages.dev/blog/post-1` | `301 → https://engrove-toolbox.pages.dev/blog/post-1`               |
-| `GET https://engrove-audio.pages.dev/?ref=x`      | `301 → https://engrove-toolbox.pages.dev/?ref=x`                    |
+| `GET https://engrove.pages.dev/`                  | `301 → http://engroveaudio.com/`                          |
+| `GET https://engrove.pages.dev/projects/tonearm`  | `301 → http://engroveaudio.com/projects/tonearm`          |
+| `GET https://engrove-audio.pages.dev/blog/post-1` | `301 → http://engroveaudio.com/blog/post-1`               |
+| `GET https://engrove-audio.pages.dev/?ref=x`      | `301 → http://engroveaudio.com/?ref=x`                    |
 
 ## Deployment
 
